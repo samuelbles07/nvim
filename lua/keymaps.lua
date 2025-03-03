@@ -30,6 +30,31 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- Easier keymap for resizing
+vim.keymap.set('n', '<C-w><Up>', '<C-w>10+', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-w><Down>', '<C-w>10-', { desc = 'Decrease window height' })
+vim.keymap.set('n', '<C-w><Left>', '<C-w>10<', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<C-w><Right>', '<C-w>10>', { desc = 'Increase window width' })
+-- Toggle maximum window either vertical or horizontal
+vim.keymap.set('n', '<leader><CR>', function()
+  local win = vim.api.nvim_get_current_win()
+  local width = vim.api.nvim_win_get_width(win)
+  local height = vim.api.nvim_win_get_height(win)
+  local max_width = vim.o.columns
+  local max_height = vim.o.lines - vim.o.cmdheight
+
+  if width > height then
+    -- Maximize width
+    vim.cmd('vertical resize ' .. max_width)
+  else
+    -- Maximize height
+    vim.cmd('resize ' .. max_height)
+  end
+end, { desc = 'Toggle maximize window size' })
+
+-- Move selected lines up/down
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
