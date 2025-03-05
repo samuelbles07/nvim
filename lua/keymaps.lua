@@ -70,4 +70,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp' },
+  callback = function()
+    vim.bo.commentstring = '// %s'
+  end,
+})
+
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Terminal
+-- Open a terminal in a horizontal split
+vim.keymap.set('n', '<leader>t', ':sp | terminal<CR>', { noremap = true, silent = true })
+-- Open a terminal in a vertical split
+vim.keymap.set('n', '<leader>vt', ':vsp | terminal<CR>', { noremap = true, silent = true })
+-- Exit terminal mode with Esc
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })

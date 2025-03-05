@@ -61,7 +61,28 @@ return {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            find_command = {
+              'rg',
+              '--files',
+              '--hidden',
+              '--no-ignore-vcs',
+              '-g',
+              '!**/.git/*',
+              '-g',
+              '!**/node_modules/*',
+              '-g',
+              '!**/.cache/*',
+              '-g',
+              '!**/.vscode/*',
+              '-g',
+              '!**/.pio/*',
+              '-g',
+              '!**/.repro/*', -- just to hide .repro rtp
+            },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),

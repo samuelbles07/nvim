@@ -35,9 +35,27 @@ return {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
+        cpp = { 'clang_format' },
+        c = { 'clang_format' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
+      },
+      formatters = {
+        clang_format = {
+          args = {
+            '--style={ BasedOnStyle: LLVM, ColumnLimit: 100, UseTab: Never, IndentWidth: 2, TabWidth: 2, BreakBeforeBraces: Attach, CommentPragmas: "^", SortIncludes: false }',
+          },
+          -- args = function()
+          --   local clang_format_file = vim.fn.findfile('.clang-format', vim.fn.getcwd() .. ';')
+          --   if clang_format_file ~= '' then
+          --     return { '--style=file' } -- Use .clang-format if found
+          --   else
+          --     return { '--style={ BasedOnStyle: LLVM, ColumnLimit: 100, UseTab: Never, IndentWidth: 2, TabWidth: 2, BreakBeforeBraces: Attach }' }
+          --   end
+          -- end,
+        },
       },
     },
   },

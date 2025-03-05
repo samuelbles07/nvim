@@ -209,7 +209,53 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {
+          filetypes = { 'cpp', 'c' },
+          cmd = {
+            '/Users/bles/.local/share/nvim/mason/bin/clangd',
+            '--background-index',
+            '-j=12',
+            '--query-driver=**',
+            '--clang-tidy',
+            '--all-scopes-completion',
+            '--cross-file-rename',
+            '--completion-style=detailed',
+            '--header-insertion-decorators',
+            '--header-insertion=iwyu',
+            '--pch-storage=memory',
+            '--suggest-missing-includes',
+          },
+        },
+        -- arduino_language_server = {
+        --   capabilities = {},
+        --   filetypes = {
+        --     'arduino',
+        --     'cpp',
+        --   },
+        --   -- cmd = {
+        --   --   'arduino-language-server',
+        --   --   '-clangd',
+        --   --   '/usr/bin/clangd',
+        --   --   '-cli-config',
+        --   --   '/Users/bles/Library/Arduino15/arduino-cli.yaml',
+        --   --   '-cli',
+        --   --   '/opt/homebrew/bin/arduino-cli',
+        --   --   '-fqbn',
+        --   --   'arduino:avr:uno',
+        --   -- },
+        --   cmd = {
+        --     '/Users/bles/.local/share/nvim/mason/bin/arduino-language-server',
+        --     '-cli-config',
+        --     '/Users/bles/Library/Arduino15/arduino-cli.yaml',
+        --     -- '-clangd',
+        --     -- '/Users/bles/.local/share/nvim/mason/bin/clangd',
+        --     -- '/usr/bin/clangd',
+        --     '-cli',
+        --     '/opt/homebrew/bin/arduino-cli',
+        --     '-fqbn',
+        --     'esp32:esp32:esp32c3',
+        --   },
+        -- },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -219,8 +265,7 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
+        ts_ls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -254,6 +299,8 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettierd', -- For ts and js
+        'clang-format',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
