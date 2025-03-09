@@ -81,6 +81,7 @@ return {
               '-g',
               '!**/.repro/*', -- just to hide .repro rtp
             },
+            -- theme = 'dropdown',
           },
         },
         extensions = {

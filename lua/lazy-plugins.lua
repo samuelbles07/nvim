@@ -36,7 +36,7 @@ require('lazy').setup({
   require 'kickstart/plugins/cmp',
 
   -- require 'kickstart/plugins/tokyonight',
-  require 'custom.plugins.nightfox',
+  -- require 'custom.plugins.nightfox',
   -- require 'custom.plugins.rose-pine',
 
   require 'kickstart/plugins/todo-comments',
